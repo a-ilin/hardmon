@@ -1,10 +1,7 @@
 #include "hardmon/CFftAnalysis.hpp"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
 #include <fftwpp/Array.h>
 #include <fftwpp/fftw++.h>
-#pragma GCC diagnostic pop
 
 
 namespace bf = boost::filesystem;
