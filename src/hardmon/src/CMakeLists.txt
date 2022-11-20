@@ -14,7 +14,7 @@ target_include_directories(${TARGET}
 )
 
 target_link_libraries(${TARGET}
-    PRIVATE
+    PUBLIC
         ${Boost_LIBRARIES}
         pthread
         fftwpp

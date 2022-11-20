@@ -2,6 +2,7 @@ set(TARGET ${PROJECT_NAME}_test)
 
 set(SOURCES
     main.cpp
+    CSensorReaderTest.cpp
 )
 
 add_executable(${TARGET} ${SOURCES})
@@ -9,9 +10,9 @@ add_executable(${TARGET} ${SOURCES})
 target_link_libraries(
     ${TARGET}
     PRIVATE
-        gtest
-        pthread
         ${PROJECT_NAME}
+        gmock
+        gtest
 )
 
 add_test(NAME ${TARGET} COMMAND ${TARGET})

@@ -18,7 +18,7 @@ TBD
 
 All necessary build dependencies mentioned below may be installed on Ubuntu with the following command:
 ```sh
-sudo apt install build-essentials cmake g++ libyaml-cpp-dev libgtest-dev libboost-all-dev libhdf5-dev libfftw3-dev
+sudo apt install build-essentials cmake g++ libyaml-cpp-dev libboost-all-dev libhdf5-dev libfftw3-dev libgtest-dev libgmock-dev
 ```
 
 ### Compiler
@@ -68,7 +68,7 @@ Boost provides free peer-reviewed portable C++ source libraries.
 <https://www.boost.org/>
 
 
-### GTest
+### GTest & GMock
 Google Test is a C++ test framework.
 
 <https://github.com/google/googletest>

@@ -42,27 +42,33 @@ void CSensorReader::configureSensors(const YAML::Node &configSensors) noexcept(f
     for (YAML::const_iterator it = configSensors.begin(); it != configSensors.end(); ++it) {
         YAML::Node node = *it;
 
-        std::string type = node["sensor"].as<std::string>();
-        std::string id = node["id"].as<std::string>();
+        try {
+            std::string type = node["sensor"].as<std::string>();
+            std::string id = node["id"].as<std::string>();
 
-        uint64_t intervalRaw = node["interval"].as<uint64_t>();
-        auto interval = TSensorInterval(intervalRaw);
+            uint64_t intervalRaw = node["interval"].as<uint64_t>();
+            auto interval = TSensorInterval(intervalRaw);
 
-        YAML::Node params = node["params"];
+            YAML::Node params = node["params"];
 
-        auto sensor = CSensorFactory::createSensor(type, params);
+            auto sensor = CSensorFactory::createSensor(type, params);
 
-        m_sensors.push_back({
-                             .sensor = sensor,
-                             .id = id,
-                             .interval = interval,
-                             .timer = {},
-        });
+            m_sensors.push_back({
+                                 .sensor = sensor,
+                                 .id = id,
+                                 .interval = interval,
+                                 .timer = {},
+            });
 
-        m_storage->setSensorAttributes(id, {
-            .freqHz = sensorFrequency(sensor, interval),
-            .interval = interval,
-        });
+            m_storage->setSensorAttributes(id, {
+                                                .freqHz = sensorFrequency(sensor, interval),
+                                                .interval = interval,
+                                                });
+        } catch (const std::exception& ex) {
+            throw std::runtime_error(string_format("error on configuration of sensor #%d: %s",
+                                                   std::distance(configSensors.begin(), it),
+                                                   ex.what()));
+        }
     }
 }
 
