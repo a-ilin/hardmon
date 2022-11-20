@@ -8,7 +8,9 @@ find_path(FFTWPP_INCLUDE_DIR fftw++.h
 add_library(fftwpp INTERFACE IMPORTED)
 target_include_directories(fftwpp INTERFACE "${FFTWPP_INCLUDE_DIR}/..")
 target_sources(fftwpp INTERFACE "${FFTWPP_INCLUDE_DIR}/fftw++.cc")
-target_link_libraries(fftwpp INTERFACE fftw3)
+target_link_libraries(fftwpp INTERFACE fftw3 fftw3_omp)
+target_compile_options(fftwpp INTERFACE -fopenmp)
+target_link_options(fftwpp INTERFACE -fopenmp)
 
 set_source_files_properties("fftw++.cc"
     TARGET_DIRECTORY fftwpp
