@@ -1,5 +1,6 @@
 #include "hardmon/sensor/CSensorFactory.hpp"
 #include "hardmon/sensor/CSensorRegularFile.hpp"
+#include "hardmon/sensor/CSensorSndFile.hpp"
 #include "hardmon/Utils.hpp"
 
 #include <functional>
@@ -24,6 +25,7 @@ std::shared_ptr<ISensor> CSensorFactory::createSensor(const std::string& type, c
 
     static const std::unordered_map<std::string, SensorCtorFunc> factories = {
         {"regular-file", SensorCtor<CSensorRegularFile>()},
+        {"snd-file", SensorCtor<CSensorSndFile>()},
     };
 
     try {

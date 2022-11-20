@@ -16,6 +16,8 @@ set(ENV{PKG_CONFIG_PATH} "$ENV{PKG_CONFIG_PATH}:${CMAKE_PREFIX_PATH}")
 pkg_check_modules(fftw3 REQUIRED IMPORTED_TARGET fftw3)
 include(Findfftwpp)
 
+pkg_check_modules(sndfile REQUIRED IMPORTED_TARGET sndfile)
+
 # Testing
 if(ENABLE_UNIT_TESTS)
     find_package(GTest REQUIRED)

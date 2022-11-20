@@ -20,6 +20,7 @@ target_link_libraries(${TARGET}
         fftwpp
         HighFive
         yaml-cpp
+        sndfile
 )
 
 add_subdirectory(plotfile)

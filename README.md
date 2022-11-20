@@ -18,7 +18,7 @@ TBD
 
 All necessary build dependencies mentioned below may be installed on Ubuntu with the following command:
 ```sh
-sudo apt install build-essentials cmake g++ libyaml-cpp-dev libboost-all-dev libhdf5-dev libfftw3-dev libgtest-dev libgmock-dev
+sudo apt install build-essentials cmake g++ libyaml-cpp-dev libboost-all-dev libhdf5-dev libfftw3-dev libsndfile1-dev libgtest-dev libgmock-dev
 ```
 
 ### Compiler
@@ -66,6 +66,11 @@ Added as a Git submodule.
 Boost provides free peer-reviewed portable C++ source libraries.
 
 <https://www.boost.org/>
+
+
+### libsndfile
+
+<https://github.com/libsndfile/libsndfile>
 
 
 ### GTest & GMock

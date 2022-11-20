@@ -116,7 +116,8 @@ void CSensorReader::scheduleSensor(SensorEntry &entry)
             m_storage->appendValue(entry.id, value);
         }
 
-        std::cout << entry.id << ": " << value << std::endl;
+        // TODO: add debug macro
+        //std::cout << entry.id << ": " << value << std::endl;
 
         if (!m_isStopping) {
             scheduleSensor(entry);

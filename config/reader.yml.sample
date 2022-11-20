@@ -11,3 +11,11 @@ sensors:
     # parameters of the sensor
     params:
       filename: /sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq
+
+  - sensor: snd-file
+    id: snd_nemo
+    interval: 5
+    params:
+      filename: /home/master/tmp/Nemo.flac
+      channel: 0
+      skip-millisec: 15000
