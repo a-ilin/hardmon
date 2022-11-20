@@ -57,8 +57,8 @@ protected:
 private:
     std::mutex m_storageLocker;
     std::shared_ptr<IStorage> m_storage;
-    std::vector<SensorEntry> m_sensors;
     std::vector<std::unique_ptr<WorkerThread>> m_workers;
+    std::vector<SensorEntry> m_sensors;
     std::atomic_bool m_isStopping;
 };
 
