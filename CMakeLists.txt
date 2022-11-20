@@ -9,6 +9,7 @@ include(FeatureSummary)
 set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
     ${CMAKE_SOURCE_DIR}/cmake
+    ${CMAKE_SOURCE_DIR}/cmake_modules
 )
 
 include(consts)
@@ -26,6 +27,9 @@ if(ENABLE_UNIT_TESTS)
 endif(ENABLE_UNIT_TESTS)
 
 feature_summary(WHAT ALL)
+
+# 3rd party libraries
+add_subdirectory(vendor)
 
 # source directory
 add_subdirectory(src)

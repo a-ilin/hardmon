@@ -1,4 +1,3 @@
-add_subdirectory(include)
 add_subdirectory(src)
 
 if(ENABLE_UNIT_TESTS)

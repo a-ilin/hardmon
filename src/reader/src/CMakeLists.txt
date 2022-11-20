@@ -11,4 +11,9 @@ target_link_libraries(${TARGET}
         ${PROJECT_NAME}
 )
 
+target_compile_definitions(${TARGET}
+    PRIVATE
+        READER_CONFIG_FILE=\"${READER_CONFIG_FILE}\"
+)
+
 install(TARGETS ${TARGET})

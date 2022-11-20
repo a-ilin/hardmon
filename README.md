@@ -18,7 +18,7 @@ TBD
 
 All necessary build dependencies mentioned below may be installed on Ubuntu with the following command:
 ```sh
-sudo apt install build-essentials cmake g++ libyaml-cpp-dev libgtest-dev libboost-all-dev libhdf5-dev
+sudo apt install build-essentials cmake g++ libyaml-cpp-dev libgtest-dev libboost-all-dev libhdf5-dev libfftw3-dev
 ```
 
 ### Compiler
@@ -37,16 +37,29 @@ yaml-cpp is a YAML parser and emitter in C++ matching the YAML 1.2 spec.
 
 
 ### HighFive
-HighFive - HDF5 header-only C++ Library
+HighFive - HDF5 header-only C++ Library.
 Added as a Git submodule.
 
 <https://github.com/BlueBrain/HighFive>
 
 
 ### hdf5
-Hierarchical Data Format 5
+Hierarchical Data Format 5.
 
 <https://www.hdfgroup.org/solutions/hdf5>
+
+
+### FFTW
+FFTW is a C subroutine library for computing the discrete Fourier transform (DFT).
+
+<https://www.fftw.org/>
+
+
+### FFTW++
+FFTW++: Fast Fourier Transform C++ Header/MPI Transpose for FFTW3.
+Added as a Git submodule.
+
+<https://fftwpp.sourceforge.net/>
 
 
 ### boost >= 1.41

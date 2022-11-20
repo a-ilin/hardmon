@@ -1,1 +1,13 @@
-[]
+# number of threads to process sensors
+threads: 4
+
+sensors:
+    # type of the sensor
+  - sensor: regular-file
+    # identifier to show on the graph
+    id: cpu0_freq
+    # interval in milliseconds
+    interval: 20
+    # parameters of the sensor
+    params:
+      filename: /sys/devices/system/cpu/cpufreq/policy0/scaling_cur_freq

@@ -1,0 +1,6 @@
+[submodule "vendor/HighFive"]
+	path = vendor/HighFive
+	url = https://github.com/BlueBrain/HighFive.git
+[submodule "vendor/fftwpp"]
+	path = vendor/fftwpp
+	url = https://github.com/dealias/fftwpp.git

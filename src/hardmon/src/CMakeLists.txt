@@ -1,7 +1,9 @@
 set(TARGET ${PROJECT_NAME})
 
 set(SOURCES
-    hardmon.cpp
+    CFftAnalysis.cpp
+    CSensorReader.cpp
+    CSignalHandler.cpp
 )
 
 add_library(${TARGET} "${SOURCES}")
@@ -13,5 +15,13 @@ target_include_directories(${TARGET}
 
 target_link_libraries(${TARGET}
     PRIVATE
+        ${Boost_LIBRARIES}
+        pthread
+        fftwpp
+        HighFive
         yaml-cpp
 )
+
+add_subdirectory(plotfile)
+add_subdirectory(sensor)
+add_subdirectory(storage)
