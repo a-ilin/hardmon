@@ -39,21 +39,22 @@ void CFftAnalysis::frequencyMagnitude(std::vector<TSensorValue> &out,
     const size_t np = n/2+1;          // output size
 
     constexpr size_t align = sizeof(Complex);
-    Array::array1<hardmon::TSensorValue> fIn(n, align);
+    Array::array1<TSensorValue> fIn(n, align);
     Array::array1<Complex> fOut(np, align);
 
-    fIn = values.data(); // makes deep copy
-
     // create FFT plan
-    fftwpp::rcfft1d Forward(n, fIn, fOut, threads);
+    fftwpp::rcfft1d forward(n, fIn, fOut, threads);
+
+    // NOTE: load data after creation of the plan!
+    fIn.Load(values.data());
 
     // execute FFT plan
-    Forward.fft(fIn, fOut);
+    forward.fft(fIn, fOut);
 
     // calculate power spectrum
     out.resize(np - 1);
     for (size_t i = 1; i < np; ++i) {
-        hardmon::TSensorValue mag = abs(fOut[i]);
+        TSensorValue mag = abs(fOut[i]);
         out[i-1] = mag;
     }
 }
