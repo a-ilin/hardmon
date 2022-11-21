@@ -11,15 +11,17 @@
 namespace hardmon
 {
 
-
-class CStorage : public IStorage
+/*!
+ * \brief The CHdf5Storage class represents storage based on HDF5 file format.
+ */
+class CHdf5Storage : public IStorage
 {
 public:
     using Container = std::vector<TSensorValue>;
     using StorageEntry = std::pair<SensorAttributes, Container>;
 
 public:
-    CStorage(const std::string& fileName);
+    CHdf5Storage(const std::string& fileName);
 
     // set sensor attributes
     void setSensorAttributes(const std::string& tag, const SensorAttributes& attr) override;

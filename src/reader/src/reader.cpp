@@ -1,6 +1,6 @@
 #include "hardmon/CSensorReader.hpp"
 #include "hardmon/CSignalHandler.hpp"
-#include "hardmon/storage/CStorage.hpp"
+#include "hardmon/storage/CHdf5Storage.hpp"
 
 #include <iostream>
 
@@ -18,7 +18,7 @@ namespace po = boost::program_options;
 
 static bool parseArgs(Args& args, int argc, char* argv[])
 {
-    po::options_description desc("Allowed options");
+    po::options_description desc("Usage");
     desc.add_options()
         ("help", "produce help message")
         ("config", po::value<std::string>(), "path to config file")
@@ -39,12 +39,12 @@ static bool parseArgs(Args& args, int argc, char* argv[])
         } else {
             args.configFileName = READER_CONFIG_FILE;
         }
+
+        args.dataFileName = vm["data"].as<std::string>();
     } catch (const std::exception&) {
         std::cout << desc << std::endl;
         return false;
     }
-
-    args.dataFileName = vm["data"].as<std::string>();
 
     return true;
 }
@@ -55,15 +55,16 @@ int main(int argc, char* argv[])
 
     Args args;
     if (!parseArgs(args, argc, argv)) {
+        // no need to print message here
         return 1;
     }
 
     YAML::Node config = YAML::LoadFile(args.configFileName);
     if (config.IsNull()) {
-        return 1;
+        throw std::runtime_error("Config file is empty");
     }
 
-    auto storage = std::make_shared<CStorage>(args.dataFileName);
+    auto storage = std::make_shared<CHdf5Storage>(args.dataFileName);
 
     CSensorReader reader(storage, config["threads"].as<size_t>());
     reader.configureSensors(config["sensors"]);

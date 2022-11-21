@@ -11,6 +11,11 @@ class Node;
 namespace hardmon
 {
 
+/*!
+ * \brief The CSensorFactory class instantiates sensors.
+ *
+ * All sensor types must be registered in the factory.
+ */
 class CSensorFactory
 {
 public:

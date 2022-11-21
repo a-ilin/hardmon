@@ -1,6 +1,6 @@
 #include "hardmon/CFftAnalysis.hpp"
 #include "hardmon/plotfile/CGnuPlotFile.hpp"
-#include "hardmon/storage/CStorage.hpp"
+#include "hardmon/storage/CHdf5Storage.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
 
     Args args;
     if (!parseArgs(args, argc, argv)) {
+        // no need to print message here
         return 1;
     }
 
@@ -70,7 +71,7 @@ int main(int argc, char* argv[])
     gnuplot.setYLabel(args.doFFT ? "Magnitute" : "Value");
     gnuplot.setLinesPoints(true);
 
-    auto storage = std::make_shared<CStorage>(args.dataFileName);
+    auto storage = std::make_shared<CHdf5Storage>(args.dataFileName);
     storage->load(args.sensor);
 
     const auto& values = storage->values(args.sensor);

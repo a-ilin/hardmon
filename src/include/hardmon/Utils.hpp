@@ -4,8 +4,18 @@
 #include <string>
 #include <stdexcept>
 
-// source: https://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
-
+/*!
+ * \brief Formats std::string in a similar way to snprintf
+ *
+ * Important: do not use std::string as a format argument.
+ * Use std::string::c_string() method, and pass C-string instead.
+ *
+ * Source: https://stackoverflow.com/questions/2342162/stdstring-formatting-like-sprintf
+ *
+ * \param format the format string
+ * \param args the formatting arguments
+ * \return std::string of formatted text
+ */
 template<typename ... Args>
 std::string string_format( const std::string& format, Args ... args )
 {

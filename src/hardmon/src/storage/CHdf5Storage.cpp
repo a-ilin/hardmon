@@ -1,37 +1,39 @@
-#include "hardmon/storage/CStorage.hpp"
+#include "hardmon/storage/CHdf5Storage.hpp"
 
 #include <highfive/H5Easy.hpp>
 
 namespace hardmon
 {
 
-CStorage::CStorage(const std::string &fileName)
+CHdf5Storage::CHdf5Storage(const std::string &fileName)
     : m_fileName(fileName)
 {
 }
 
-void CStorage::setSensorAttributes(const std::string &tag, const SensorAttributes &attr)
+void CHdf5Storage::setSensorAttributes(const std::string &tag, const SensorAttributes &attr)
 {
     m_data[tag].first = attr;
 }
 
-void CStorage::appendValue(const std::string &tag, const TSensorValue &value)
+void CHdf5Storage::appendValue(const std::string &tag, const TSensorValue &value)
 {
+    // TODO: implement appending directly to HDF5 to reduce memory footprint.
+
     auto& container = m_data[tag].second;
     container.push_back(value);
 }
 
-const IStorage::SensorAttributes &CStorage::sensorAttributes(const std::string &tag) const
+const IStorage::SensorAttributes &CHdf5Storage::sensorAttributes(const std::string &tag) const
 {
     return m_data.at(tag).first;
 }
 
-const CStorage::Container& CStorage::values(const std::string &tag) const
+const CHdf5Storage::Container& CHdf5Storage::values(const std::string &tag) const
 {
     return m_data.at(tag).second;
 }
 
-void CStorage::saveAll()
+void CHdf5Storage::saveAll()
 {
     H5Easy::File file(m_fileName, HighFive::File::Overwrite);
 
@@ -40,17 +42,17 @@ void CStorage::saveAll()
     }
 }
 
-void CStorage::loadAll()
+void CHdf5Storage::loadAll()
 {
     throw std::runtime_error("Not implemented");
 }
 
-void CStorage::save(const std::string &tag)
+void CHdf5Storage::save(const std::string &tag)
 {
     saveEntry(tag, m_data[tag]);
 }
 
-void CStorage::load(const std::string &tag)
+void CHdf5Storage::load(const std::string &tag)
 {
     H5Easy::File file(m_fileName, HighFive::File::ReadOnly);
     auto& readings = m_data[tag];
@@ -62,7 +64,7 @@ void CStorage::load(const std::string &tag)
     readings.first.interval = TSensorInterval(H5Easy::loadAttribute<uint64_t>(file, "/" + tag, "interval"));
 }
 
-void CStorage::saveEntry(const std::string& tag, const StorageEntry& entry) const
+void CHdf5Storage::saveEntry(const std::string& tag, const StorageEntry& entry) const
 {
     H5Easy::File file(m_fileName, HighFive::File::ReadWrite);
     H5Easy::dump(file, "/" + tag, entry.second);

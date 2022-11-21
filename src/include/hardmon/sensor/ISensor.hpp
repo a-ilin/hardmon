@@ -6,6 +6,9 @@
 namespace hardmon
 {
 
+/*!
+ * \brief The ISensor class is a base class for sensors.
+ */
 class ISensor
 {
 public:

@@ -20,6 +20,9 @@ class Node;
 namespace hardmon
 {
 
+/*!
+ * \brief The CSensorReader class reads the sensor values and sends to the storage.
+ */
 class CSensorReader
 {
     struct SensorEntry
@@ -43,9 +46,20 @@ public:
     explicit CSensorReader(const std::shared_ptr<IStorage>& storage, size_t threadCount = 1);
     ~CSensorReader();
 
+    /*!
+     * \brief Setups the sensor to read from.
+     * \param configSensors configuration node containing array of sensors.
+     */
     void configureSensors(const YAML::Node& configSensors) noexcept(false);
 
+    /*!
+     * \brief Starts reading.
+     */
     void start();
+
+    /*!
+     * \brief Stops reading.
+     */
     void stop();
 
 protected:

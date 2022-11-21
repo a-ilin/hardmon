@@ -8,12 +8,20 @@
 namespace hardmon
 {
 
+/*!
+ * \brief The CSignalHandler class allows waiting for system signals.
+ *
+ * The following signals are being handled: SIGTERM, SIGINT, SIGHUP.
+ */
 class CSignalHandler
 {
 public:
     CSignalHandler();
     ~CSignalHandler();
 
+    /*!
+     * \brief Waits for any of the handled signals.
+     */
     void wait();
 
 private:
