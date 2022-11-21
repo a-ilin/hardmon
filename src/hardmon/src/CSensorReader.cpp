@@ -6,20 +6,18 @@
 
 #include <yaml-cpp/yaml.h>
 
+namespace hardmon {
 
-namespace hardmon
-{
-
-CSensorReader::WorkerThread::WorkerThread(const char *threadName)
+CSensorReader::WorkerThread::WorkerThread(const char* threadName)
     : workGuard(boost::asio::make_work_guard(context))
-    , thread([this](){ context.run(); })
+    , thread([this]() { context.run(); })
 {
-    if(pthread_setname_np(thread.native_handle(), threadName)) {
+    if (pthread_setname_np(thread.native_handle(), threadName)) {
         std::cerr << "Failed to set thread name: " << threadName << std::endl;
     }
 }
 
-CSensorReader::CSensorReader(const std::shared_ptr<IStorage> &storage, size_t threadCount)
+CSensorReader::CSensorReader(const std::shared_ptr<IStorage>& storage, size_t threadCount)
     : m_storage(storage)
     , m_isStopping(false)
 {
@@ -33,7 +31,7 @@ CSensorReader::~CSensorReader()
     stop();
 }
 
-void CSensorReader::configureSensors(const YAML::Node &configSensors) noexcept(false)
+void CSensorReader::configureSensors(const YAML::Node& configSensors) noexcept(false)
 {
     assert(m_sensors.size() == 0);
 
@@ -54,20 +52,20 @@ void CSensorReader::configureSensors(const YAML::Node &configSensors) noexcept(f
             auto sensor = CSensorFactory::createSensor(type, params);
 
             m_sensors.push_back({
-                                 .sensor = sensor,
-                                 .id = id,
-                                 .interval = interval,
-                                 .timer = {},
+              .sensor = sensor,
+              .id = id,
+              .interval = interval,
+              .timer = {},
             });
 
-            m_storage->setSensorAttributes(id, {
-                                                .freqHz = sensorFrequency(sensor, interval),
-                                                .interval = interval,
-                                                });
+            m_storage->setSensorAttributes(id,
+                                           {
+                                             .freqHz = sensorFrequency(sensor, interval),
+                                             .interval = interval,
+                                           });
         } catch (const std::exception& ex) {
-            throw std::runtime_error(string_format("error on configuration of sensor #%d: %s",
-                                                   std::distance(configSensors.begin(), it),
-                                                   ex.what()));
+            throw std::runtime_error(string_format(
+              "error on configuration of sensor #%d: %s", std::distance(configSensors.begin(), it), ex.what()));
         }
     }
 }
@@ -102,7 +100,7 @@ void CSensorReader::stop()
     }
 }
 
-void CSensorReader::scheduleSensor(SensorEntry &entry)
+void CSensorReader::scheduleSensor(SensorEntry& entry)
 {
     auto handler = [this, &entry](const boost::system::error_code& error) {
         if (boost::asio::error::operation_aborted == error) {
@@ -117,7 +115,7 @@ void CSensorReader::scheduleSensor(SensorEntry &entry)
         }
 
         // TODO: add debug macro
-        //std::cout << entry.id << ": " << value << std::endl;
+        // std::cout << entry.id << ": " << value << std::endl;
 
         if (!m_isStopping) {
             scheduleSensor(entry);
@@ -128,14 +126,13 @@ void CSensorReader::scheduleSensor(SensorEntry &entry)
     entry.timer->async_wait(handler);
 }
 
-TSensorFrequency CSensorReader::sensorFrequency(const std::shared_ptr<ISensor> &sensor,
-                                                const TSensorInterval &interval)
+TSensorFrequency CSensorReader::sensorFrequency(const std::shared_ptr<ISensor>& sensor, const TSensorInterval& interval)
 {
     TSensorFrequency freqHz = static_cast<TSensorFrequency>(0);
 
     try {
         freqHz = sensor->frequency();
-    } catch(const std::runtime_error&) {
+    } catch (const std::runtime_error&) {
     }
 
     if (freqHz == static_cast<TSensorFrequency>(0)) {
@@ -146,4 +143,4 @@ TSensorFrequency CSensorReader::sensorFrequency(const std::shared_ptr<ISensor> &
     return freqHz;
 }
 
-}
+} // namespace hardmon

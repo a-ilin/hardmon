@@ -10,11 +10,11 @@
 
 #include <gtest/gtest.h>
 
-
-class CSensorReaderTest : public ::testing::Test {
+class CSensorReaderTest : public ::testing::Test
+{
 protected:
     void SetUp() override {}
-    void TearDown() override  {}
+    void TearDown() override {}
 };
 
 namespace bf = boost::filesystem;
@@ -41,27 +41,24 @@ TEST_F(CSensorReaderTest, appendValue)
 
     auto reader = hardmon::CSensorReader(storage);
 
-    YAML::Node nodeSensors = YAML::Load(string_format(
-        "[ "
-        " { "
-        "  sensor: regular-file, "
-        "  id: test-sensor, "
-        "  interval: 5, "
-        "  params: { "
-        "   filename: %s,"
-        "  },"
-        " },"
-        "] ",
-        (bf::path(__FILE__).parent_path() / "testdata" / "static_42.txt").c_str()
-    ));
+    YAML::Node nodeSensors =
+      YAML::Load(string_format("[ "
+                               " { "
+                               "  sensor: regular-file, "
+                               "  id: test-sensor, "
+                               "  interval: 5, "
+                               "  params: { "
+                               "   filename: %s,"
+                               "  },"
+                               " },"
+                               "] ",
+                               (bf::path(__FILE__).parent_path() / "testdata" / "static_42.txt").c_str()));
 
     reader.configureSensors(nodeSensors);
 
     reader.start();
 
-    EXPECT_CALL(*storage, appendValue("test-sensor", 42))
-        .Times(AtLeast(1))
-        .WillOnce(VoidFromAsyncCall(&semDone));
+    EXPECT_CALL(*storage, appendValue("test-sensor", 42)).Times(AtLeast(1)).WillOnce(VoidFromAsyncCall(&semDone));
 
     boost::posix_time::ptime until = boost::posix_time::second_clock::universal_time() + boost::posix_time::seconds(1);
     EXPECT_TRUE(semDone.timed_wait(until));

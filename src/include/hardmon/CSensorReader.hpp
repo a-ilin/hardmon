@@ -12,13 +12,11 @@
 #include <boost/asio/deadline_timer.hpp>
 #include <boost/asio/io_context.hpp>
 
-
 namespace YAML {
 class Node;
 }
 
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The CSensorReader class reads the sensor values and sends to the storage.
@@ -65,8 +63,7 @@ public:
 protected:
     void scheduleSensor(SensorEntry& entry);
 
-    static TSensorFrequency sensorFrequency(const std::shared_ptr<ISensor>& sensor,
-                                            const TSensorInterval& interval);
+    static TSensorFrequency sensorFrequency(const std::shared_ptr<ISensor>& sensor, const TSensorInterval& interval);
 
 private:
     std::mutex m_storageLocker;
@@ -76,4 +73,4 @@ private:
     std::atomic_bool m_isStopping;
 };
 
-}
+} // namespace hardmon

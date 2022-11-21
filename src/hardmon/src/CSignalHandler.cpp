@@ -3,8 +3,7 @@
 #include <csignal>
 #include <iostream>
 
-namespace hardmon
-{
+namespace hardmon {
 
 static CSignalHandler* g_signalHandler = nullptr;
 
@@ -44,4 +43,4 @@ void CSignalHandler::handler(int signal)
     g_signalHandler->m_cv.notify_all();
 }
 
-}
+} // namespace hardmon

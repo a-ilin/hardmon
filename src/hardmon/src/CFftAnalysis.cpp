@@ -3,11 +3,9 @@
 #include <fftwpp/Array.h>
 #include <fftwpp/fftw++.h>
 
-
 namespace bf = boost::filesystem;
 
-namespace hardmon
-{
+namespace hardmon {
 
 CFftAnalysis::CFftAnalysis()
 {
@@ -28,12 +26,12 @@ CFftAnalysis::~CFftAnalysis()
     bf::remove_all(m_tmpDir);
 }
 
-void CFftAnalysis::frequencyMagnitude(std::vector<TSensorValue> &out,
-                                      const std::vector<TSensorValue> &values,
+void CFftAnalysis::frequencyMagnitude(std::vector<TSensorValue>& out,
+                                      const std::vector<TSensorValue>& values,
                                       size_t threads) const
 {
-    const size_t n = values.size();   // input size
-    const size_t np = n/2+1;          // output size
+    const size_t n = values.size(); // input size
+    const size_t np = n / 2 + 1;    // output size
 
     constexpr size_t align = sizeof(Complex);
     Array::array1<TSensorValue> fIn(n, align);
@@ -52,9 +50,8 @@ void CFftAnalysis::frequencyMagnitude(std::vector<TSensorValue> &out,
     out.resize(np - 1);
     for (size_t i = 1; i < np; ++i) {
         TSensorValue mag = abs(fOut[i]);
-        out[i-1] = mag;
+        out[i - 1] = mag;
     }
 }
 
-
-}
+} // namespace hardmon

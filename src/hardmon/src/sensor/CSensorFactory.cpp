@@ -1,31 +1,32 @@
 #include "hardmon/sensor/CSensorFactory.hpp"
+#include "hardmon/Utils.hpp"
 #include "hardmon/sensor/CSensorRegularFile.hpp"
 #include "hardmon/sensor/CSensorSndFile.hpp"
-#include "hardmon/Utils.hpp"
 
 #include <functional>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
 
-namespace hardmon
-{
+namespace hardmon {
 
 template<class T>
-struct SensorCtor{
-    std::shared_ptr<ISensor> operator()(const YAML::Node& configSensorParam) const {
+struct SensorCtor
+{
+    std::shared_ptr<ISensor> operator()(const YAML::Node& configSensorParam) const
+    {
         return std::make_shared<T>(configSensorParam);
     }
 };
 
-
-std::shared_ptr<ISensor> CSensorFactory::createSensor(const std::string& type, const YAML::Node& configSensorParam) noexcept(false)
+std::shared_ptr<ISensor> CSensorFactory::createSensor(const std::string& type,
+                                                      const YAML::Node& configSensorParam) noexcept(false)
 {
     using SensorCtorFunc = std::function<std::shared_ptr<ISensor>(const YAML::Node&)>;
 
     static const std::unordered_map<std::string, SensorCtorFunc> factories = {
-        {"regular-file", SensorCtor<CSensorRegularFile>()},
-        {"snd-file", SensorCtor<CSensorSndFile>()},
+        { "regular-file", SensorCtor<CSensorRegularFile>() },
+        { "snd-file", SensorCtor<CSensorSndFile>() },
     };
 
     try {
@@ -38,4 +39,4 @@ std::shared_ptr<ISensor> CSensorFactory::createSensor(const std::string& type, c
     }
 }
 
-}
+} // namespace hardmon

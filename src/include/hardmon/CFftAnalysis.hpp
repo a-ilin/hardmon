@@ -6,9 +6,7 @@
 
 #include <boost/filesystem.hpp>
 
-
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The CFftAnalysis class provides methods for Fast Fourier transformation.
@@ -36,7 +34,8 @@ public:
      * \param count the total number of measured points (on X axes)
      * \return
      */
-    static TSensorFrequency frequencyIndex(TSensorFrequency frequencyHz, size_t index, size_t count) {
+    static TSensorFrequency frequencyIndex(TSensorFrequency frequencyHz, size_t index, size_t count)
+    {
         return frequencyHz * index / count;
     }
 
@@ -45,4 +44,4 @@ private:
     boost::filesystem::path m_wisdomPath;
 };
 
-}
+} // namespace hardmon

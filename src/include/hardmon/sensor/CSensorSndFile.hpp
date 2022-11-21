@@ -12,8 +12,7 @@ class Node;
 
 class SndfileHandle;
 
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The CSensorSndFile class represents a sensor reading frames from a sound file.
@@ -46,4 +45,4 @@ private:
     int m_channel;
 };
 
-}
+} // namespace hardmon

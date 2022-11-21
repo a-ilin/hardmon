@@ -4,8 +4,7 @@
 
 #include <string>
 
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The IStorage class is a base class for storages.
@@ -47,5 +46,4 @@ public:
     virtual void appendValue(const std::string& tag, const TSensorValue& value) = 0;
 };
 
-
-}
+} // namespace hardmon

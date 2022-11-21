@@ -2,9 +2,7 @@
 
 #include "hardmon/Types.hpp"
 
-
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The ISensor class is a base class for sensors.
@@ -34,4 +32,4 @@ public:
     virtual TSensorValue measure() const noexcept(false) = 0;
 };
 
-}
+} // namespace hardmon

@@ -4,7 +4,6 @@
 
 #include <gmock/gmock.h>
 
-
 class CStorageMock : public hardmon::IStorage
 {
 public:

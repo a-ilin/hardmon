@@ -6,14 +6,11 @@
 #include <fstream>
 #include <iostream>
 
+namespace hardmon {
 
-namespace hardmon
-{
-
-CSensorRegularFile::CSensorRegularFile(const YAML::Node &configSensorParam)
+CSensorRegularFile::CSensorRegularFile(const YAML::Node& configSensorParam)
     : m_fileName(configSensorParam["filename"].as<std::string>())
 {
-
 }
 
 TSensorFrequency CSensorRegularFile::frequency() const noexcept(false)
@@ -34,4 +31,4 @@ TSensorValue CSensorRegularFile::measure() const noexcept(false)
     return result;
 }
 
-}
+} // namespace hardmon

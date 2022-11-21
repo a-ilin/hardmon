@@ -19,10 +19,12 @@ namespace po = boost::program_options;
 static bool parseArgs(Args& args, int argc, char* argv[])
 {
     po::options_description desc("Usage");
+    // clang-format off
     desc.add_options()
         ("help", "produce help message")
         ("config", po::value<std::string>(), "path to config file")
         ("data", po::value<std::string>(), "path to output HDF5 file");
+    // clang-format on
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);

@@ -18,9 +18,10 @@ struct Args
     size_t threads = 1;
 };
 
-static bool parseArgs(Args &args, int argc, char* argv[])
+static bool parseArgs(Args& args, int argc, char* argv[])
 {
     po::options_description desc("Usage");
+    // clang-format off
     desc.add_options()
         ("help", "produce help message")
         ("data", po::value<std::string>(), "path to input HDF5 file")
@@ -28,6 +29,7 @@ static bool parseArgs(Args &args, int argc, char* argv[])
         ("plot", po::value<std::string>(), "path to output gnuplot file")
         ("fft", "transform data with FFT")
         ("threads", po::value<size_t>(), "threads to use for FFT");
+    // clang-format on
 
     po::variables_map vm;
     po::store(po::parse_command_line(argc, argv, desc), vm);

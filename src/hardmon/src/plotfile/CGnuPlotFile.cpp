@@ -3,10 +3,9 @@
 
 #include <fstream>
 
-namespace hardmon
-{
+namespace hardmon {
 
-void CGnuPlotFile::writeData(const std::string &fileName,
+void CGnuPlotFile::writeData(const std::string& fileName,
                              const std::vector<TSensorFrequency>& xValues,
                              const std::vector<TSensorValue>& yValues)
 {
@@ -55,4 +54,4 @@ void CGnuPlotFile::writeData(const std::string &fileName,
     plotFile << std::endl;
 }
 
-}
+} // namespace hardmon

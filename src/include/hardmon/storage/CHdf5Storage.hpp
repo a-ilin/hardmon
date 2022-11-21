@@ -1,15 +1,13 @@
 #pragma once
 
-#include "hardmon/storage/IStorage.hpp"
 #include "hardmon/Types.hpp"
+#include "hardmon/storage/IStorage.hpp"
 
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The CHdf5Storage class represents storage based on HDF5 file format.
@@ -47,5 +45,4 @@ private:
     std::unordered_map<std::string, StorageEntry> m_data;
 };
 
-
-}
+} // namespace hardmon

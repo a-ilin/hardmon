@@ -4,15 +4,14 @@
 
 #include <string>
 
-namespace hardmon
-{
+namespace hardmon {
 
 class CGnuPlotFile : public CPlotFileBase
 {
 public:
     void writeData(const std::string& fileName,
-                   const std::vector<TSensorFrequency> &xValues,
+                   const std::vector<TSensorFrequency>& xValues,
                    const std::vector<TSensorValue>& yValues) override;
 };
 
-}
+} // namespace hardmon

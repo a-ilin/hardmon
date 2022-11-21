@@ -2,9 +2,7 @@
 
 #include <boost/date_time/posix_time/posix_time_duration.hpp>
 
-
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * Type for sensor values.
@@ -21,4 +19,4 @@ using TSensorFrequency = double;
  */
 using TSensorInterval = boost::posix_time::milliseconds;
 
-}
+} // namespace hardmon

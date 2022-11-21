@@ -4,9 +4,7 @@
 #include <mutex>
 #include <vector>
 
-
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The CSignalHandler class allows waiting for system signals.
@@ -33,4 +31,4 @@ private:
     std::mutex m_mutex;
 };
 
-}
+} // namespace hardmon

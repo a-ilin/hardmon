@@ -8,8 +8,7 @@ namespace YAML {
 class Node;
 }
 
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The CSensorFactory class instantiates sensors.
@@ -19,7 +18,8 @@ namespace hardmon
 class CSensorFactory
 {
 public:
-    static std::shared_ptr<ISensor> createSensor(const std::string& type, const YAML::Node& configSensorParam) noexcept(false);
+    static std::shared_ptr<ISensor> createSensor(const std::string& type,
+                                                 const YAML::Node& configSensorParam) noexcept(false);
 };
 
-}
+} // namespace hardmon

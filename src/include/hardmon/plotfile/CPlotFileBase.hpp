@@ -5,8 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace hardmon
-{
+namespace hardmon {
 
 class CPlotFileBase
 {
@@ -37,4 +36,4 @@ protected:
     bool m_linesPoints = false;
 };
 
-}
+} // namespace hardmon

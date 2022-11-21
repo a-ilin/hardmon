@@ -7,8 +7,7 @@ namespace YAML {
 class Node;
 }
 
-namespace hardmon
-{
+namespace hardmon {
 
 /*!
  * \brief The CSensorRegularFile class represents a sensor reading a single values from a file.
@@ -33,4 +32,4 @@ private:
     const std::string m_fileName;
 };
 
-}
+} // namespace hardmon
